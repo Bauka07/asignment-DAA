@@ -1,35 +1,51 @@
-// AlgorithmMetrics.java - Core metrics collection
+// File: src/main/java/com/dac/metrics/AlgorithmMetrics.java
 package com.dac.metrics;
 
 public class AlgorithmMetrics {
     private long comparisons;
-    private long swaps;
+    private long allocations;
     private int maxDepth;
     private int currentDepth;
     private long startTime;
     private long endTime;
-    private long memoryAllocations;
+    private String algorithmName;
     
-    public AlgorithmMetrics() {
+    public AlgorithmMetrics(String algorithmName) {
+        this.algorithmName = algorithmName;
         reset();
     }
     
     public void reset() {
-        this.comparisons = 0;
-        this.swaps = 0;
-        this.maxDepth = 0;
-        this.currentDepth = 0;
-        this.startTime = 0;
-        this.endTime = 0;
-        this.memoryAllocations = 0;
+        comparisons = 0;
+        allocations = 0;
+        maxDepth = 0;
+        currentDepth = 0;
+        startTime = 0;
+        endTime = 0;
     }
     
     public void startTiming() {
-        this.startTime = System.nanoTime();
+        startTime = System.nanoTime();
     }
     
     public void endTiming() {
-        this.endTime = System.nanoTime();
+        endTime = System.nanoTime();
+    }
+    
+    public void incrementComparisons() {
+        comparisons++;
+    }
+    
+    public void addComparisons(long count) {
+        comparisons += count;
+    }
+    
+    public void incrementAllocations() {
+        allocations++;
+    }
+    
+    public void addAllocations(long count) {
+        allocations += count;
     }
     
     public void enterRecursion() {
@@ -41,23 +57,23 @@ public class AlgorithmMetrics {
         currentDepth--;
     }
     
-    public void incrementComparisons() {
-        comparisons++;
-    }
-    
-    public void incrementSwaps() {
-        swaps++;
-    }
-    
-    public void incrementAllocations(int size) {
-        memoryAllocations += size;
-    }
-    
     // Getters
+    public String getAlgorithmName() { return algorithmName; }
     public long getComparisons() { return comparisons; }
-    public long getSwaps() { return swaps; }
+    public long getAllocations() { return allocations; }
     public int getMaxDepth() { return maxDepth; }
-    public long getExecutionTimeNanos() { return endTime - startTime; }
+    public int getCurrentDepth() { return currentDepth; }
+    public long getExecutionTimeNs() { return endTime - startTime; }
     public double getExecutionTimeMs() { return (endTime - startTime) / 1_000_000.0; }
-    public long getMemoryAllocations() { return memoryAllocations; }
+    
+    @Override
+    public String toString() {
+        return String.format("%s - Time: %.2f ms, Comparisons: %d, Allocations: %d, Max Depth: %d",
+                algorithmName, getExecutionTimeMs(), comparisons, allocations, maxDepth);
+    }
+    
+    public String toCsvRow(int inputSize) {
+        return String.format("%s,%d,%d,%d,%d,%d", 
+                algorithmName, inputSize, getExecutionTimeNs(), comparisons, allocations, maxDepth);
+    }
 }
