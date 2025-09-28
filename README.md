@@ -1,5 +1,42 @@
 # Divide and Conquer Algorithms Implementation
 
+## Project Structure
+
+```
+divide-and-conquer/
+├── pom.xml                          # Maven build configuration
+├── README.md                        # This file
+├── .gitignore                      # Git ignore patterns
+├── results/                        # Generated CSV files from benchmarks
+├── src/main/java/com/dac/
+│   ├── algorithms/                 # Core algorithm implementations
+│   │   ├── MergeSort.java         # O(n log n) stable sorting
+│   │   ├── QuickSort.java         # O(n log n) average, randomized pivot
+│   │   ├── DeterministicSelect.java # O(n) selection with median-of-medians
+│   │   ├── ClosestPair.java       # O(n log n) closest pair of points
+│   │   ├── Point.java             # 2D point representation
+│   │   └── PointPair.java         # Pair of points with distance
+│   ├── metrics/                   # Performance measurement
+│   │   ├── AlgorithmMetrics.java  # Individual algorithm metrics
+│   │   ├── MetricsCollector.java  # Aggregate metrics collection
+│   │   └── CSVWriter.java         # Export results to CSV
+│   ├── util/                      # Utility classes
+│   │   └── ArrayUtils.java        # Array operations and generation
+│   └── cli/                       # Command-line interfaces
+│       ├── BenchmarkRunner.java   # Single algorithm benchmarking
+│       └── BatchBenchmark.java    # Batch and comprehensive benchmarking
+└── src/test/java/com/dac/
+    ├── algorithms/                # Unit tests for algorithms
+    │   ├── MergeSortTest.java
+    │   ├── QuickSortTest.java
+    │   ├── DeterministicSelectTest.java
+    │   └── ClosestPairTest.java
+    └── benchmarks/                # JMH performance benchmarks
+        ├── SelectBenchmark.java   # Selection algorithm benchmarks
+        ├── SortingBenchmark.java  # Sorting algorithm comparisons
+        └── ClosestPairBenchmark.java # Geometric algorithm benchmarks
+```
+
 ## Project Overview
 
 This project implements four classic divide-and-conquer algorithms in Java with comprehensive performance analysis. Each algorithm includes optimizations for practical use and detailed metrics collection for theoretical validation.
