@@ -7,7 +7,6 @@ divide-and-conquer/
 ├── pom.xml                          # Maven build configuration
 ├── README.md                        # This file
 ├── .gitignore                      # Git ignore patterns
-├── results/                        # Generated CSV files from benchmarks
 ├── src/main/java/com/dac/
 │   ├── algorithms/                 # Core algorithm implementations
 │   │   ├── MergeSort.java         # O(n log n) stable sorting
